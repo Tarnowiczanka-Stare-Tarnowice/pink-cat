@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Dummy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/BrickSpawner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/HandManipulator.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Brick.tscn" type="PackedScene" id=4]
 
 [node name="Node2D" type="Node2D"]
 
@@ -58,3 +60,22 @@ rotation = -3.12282
 
 [node name="BrickSpawner" parent="." instance=ExtResource( 2 )]
 position = Vector2( 209, 307 )
+
+[node name="HandManipulator" parent="." instance=ExtResource( 3 )]
+position = Vector2( 277, 349 )
+rotation = -0.813188
+
+[node name="HandManipulator2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 258, 364 )
+rotation = 2.31852
+left_hand = true
+
+[node name="Brick" parent="." instance=ExtResource( 4 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 355, 366 )
+mass = 12.0
+
+[node name="Brick2" parent="." instance=ExtResource( 4 )]
+modulate = Color( 0.345098, 0.345098, 0.345098, 1 )
+position = Vector2( 348, 317 )
+mass = 5.0
