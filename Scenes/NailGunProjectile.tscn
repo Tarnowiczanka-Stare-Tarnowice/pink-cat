@@ -9,6 +9,13 @@ radius = 3.16228
 [node name="NailGunProjectile" instance=ExtResource( 1 )]
 mass = 0.2
 
+[node name="Polygon2D" type="Polygon2D" parent="ShadowSlot" index="0"]
+position = Vector2( -0.0296264, 0 )
+scale = Vector2( 0.0958185, 0.0967742 )
+color = Color( 0, 0, 0, 0.545098 )
+antialiased = true
+polygon = PoolVector2Array( -31, 0, -22, -21, 0, -31, 24, -19, 31.6184, -0.885715, 23, 20, 0, 31, -21, 23 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
