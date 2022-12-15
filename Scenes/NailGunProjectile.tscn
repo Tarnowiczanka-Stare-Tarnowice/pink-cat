@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/PhysicsObject.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 3.16228
+
+[node name="NailGunProjectile" instance=ExtResource( 1 )]
+mass = 0.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="Icon" type="Sprite" parent="." index="2"]
+position = Vector2( 0, -3.57628e-07 )
+scale = Vector2( 0.09375, 0.09375 )
+texture = ExtResource( 2 )

@@ -100,7 +100,6 @@ func hit(other_velocity: Vector3, other_mass: float, other_bounciness: float, ot
 	emit_signal("hit", self, mass * (velocity - v1).length_squared()/2);
 	return v2 - (1+cr)*m1/(m1+m2) * (v2-v1).dot(-n) / n.length() / n.length() * -n
 
-
 # Ewentualne skalowanie tarcia dla ładniejszego efektu
 func friction_scaler(v):
 	if v.length() < 900:

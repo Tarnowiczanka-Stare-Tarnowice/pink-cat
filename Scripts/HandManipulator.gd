@@ -20,7 +20,9 @@ export var REST_BEGIN_TIME = 2
 var rest_time = 0
 var rest_state_position
 var throw_action
+var shoot_action
 var last_throw = 0
+var shot_id = 0
 
 # Liczba elementów oznacza "czas kojota" dla rzutu w klatkach
 var throw_force_samples = [0,0,0,0,0,0]
@@ -36,8 +38,10 @@ var grabbed = null
 func _ready():
 	var angle = -PI/3
 	throw_action = "right_throw"
+	shoot_action = "right_shoot"
 	if left_hand:
 		throw_action = "left_throw"
+		shoot_action = "left_shoot"
 		angle = PI/3
 	rest_state_position = Vector2(1,0).rotated(angle) * hand_range * 0.6
 	
@@ -97,7 +101,14 @@ func _process(delta):
 			else:
 				grabbed = null
 		
-		
+	# Strzelanie
+	# ----------
+	if Input.is_action_just_pressed(shoot_action):
+		shot_id += 1
+	if Input.is_action_pressed(shoot_action) and grabbed and grabbed.has_method("shoot"):
+		grabbed.shoot(shot_id)
+	
+	
 	
 	
 	
