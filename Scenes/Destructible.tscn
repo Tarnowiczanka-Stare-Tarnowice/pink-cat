@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/PhysicsObject.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Destructible.gd" type="Script" id=2]
+
+[node name="Destructible" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+force_damage_scaler = 0.01
+min_damaging_force = 1000
+penetration_damage = 0.0
+max_hp = 100.0
+dps_on_floor = 0.0
+
+[node name="HPBar" type="ProgressBar" parent="." index="1"]
+visible = false
+margin_left = -47.0
+margin_top = -99.0
+margin_right = 47.0
+margin_bottom = -85.0
+
+[connection signal="hit" from="." to="." method="_on_Destructible_hit"]

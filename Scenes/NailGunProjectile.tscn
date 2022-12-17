@@ -1,25 +1,32 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scenes/PhysicsObject.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Destructible.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.16228
 
-[node name="NailGunProjectile" instance=ExtResource( 1 )]
-mass = 0.2
+[node name="Destructible" instance=ExtResource( 1 )]
+mass = 0.15
+max_hp = 10.0
+dps_on_floor = 5.0
 
-[node name="Polygon2D" type="Polygon2D" parent="ShadowSlot" index="0"]
-position = Vector2( -0.0296264, 0 )
-scale = Vector2( 0.0958185, 0.0967742 )
-color = Color( 0, 0, 0, 0.545098 )
-antialiased = true
-polygon = PoolVector2Array( -31, 0, -22, -21, 0, -31, 24, -19, 31.6184, -0.885715, 23, 20, 0, 31, -21, 23 )
+[node name="Icon" type="Sprite" parent="ShadowSlot" index="0"]
+modulate = Color( 0, 0, 0, 0.372549 )
+position = Vector2( 0, -3.57628e-07 )
+scale = Vector2( 0.09375, 0.09375 )
+texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="HPBar" parent="." index="1"]
+margin_left = -27.0
+margin_top = -22.0
+margin_right = 24.0
+margin_bottom = -8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 shape = SubResource( 1 )
 
-[node name="Icon" type="Sprite" parent="." index="2"]
+[node name="Icon" type="Sprite" parent="." index="3"]
 position = Vector2( 0, -3.57628e-07 )
 scale = Vector2( 0.09375, 0.09375 )
 texture = ExtResource( 2 )
