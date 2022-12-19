@@ -1,6 +1,7 @@
 extends Node2D
 
 export var THROW_FORCE_MULTIPLIER = 1.3
+# Określa "naturalną" masę ręki, wpływa na jej szybkość
 export var self_mass = 2
 export var max_carried_item_mass = 10
 export var hand_accelleration: float = 2000
@@ -70,7 +71,8 @@ func _process(delta):
 	# ----------------------
 	var old_position = $Hand.position
 	
-	var acceleration = hand_accelleration * self_mass / (self_mass + (grabbed.mass if grabbed else 0))
+	var mass_in_hand = (self_mass + (grabbed.mass if grabbed else 0))
+	var acceleration = hand_accelleration * self_mass / mass_in_hand
 	
 	hand_speed += acceleration * acceleration_scaler() * delta;
 	hand_speed = min(hand_speed, 1400)
@@ -81,6 +83,15 @@ func _process(delta):
 	throw_force_samples_current = (throw_force_samples_current + 1) % throw_force_samples.size()
 	var throw_force = throw_force_samples.max();
 	
+	# Aktualizacja rotacji/wysokości przedmiotu
+	# -----------------------
+	if grabbed:
+		var mouse_pos_hand_rel = get_local_mouse_position() - $Hand.position
+		grabbed.global_rotation = self.global_rotation + mouse_pos_hand_rel.angle()
+		grabbed.altitude = hand_altitude
+		grabbed.update_shadow()
+	
+	# Debugging
 	$DebugArrow.modulate = Color(throw_force / 700, 1400 - throw_force/700,0)
 	
 	# Chwyt/rzut
@@ -107,9 +118,6 @@ func _process(delta):
 		shot_id += 1
 	if Input.is_action_pressed(shoot_action) and grabbed and grabbed.has_method("shoot"):
 		grabbed.shoot(shot_id)
-	
-	
-	
 	
 	
 func acceleration_scaler():

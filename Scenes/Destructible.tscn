@@ -5,7 +5,7 @@
 
 [node name="Destructible" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-force_damage_scaler = 0.01
+force_damage_scaler = 0.0005
 min_damaging_force = 1000
 penetration_damage = 0.0
 max_hp = 100.0

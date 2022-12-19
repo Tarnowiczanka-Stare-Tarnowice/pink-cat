@@ -19,6 +19,7 @@ const aerial_collision_mask = 2;
 const ground_collision_layer = 1;
 const ground_collision_mask = 1;
 
+# Wysyłany po zderzeniu, argumenty - self, force
 signal hit
 
 
@@ -35,6 +36,7 @@ func _physics_process(delta):
 	if grabber:
 		global_position = grabber.global_position
 		update_collision_mask()
+		update_shadow()
 		return
 	
 	var total_friction = 0
@@ -53,9 +55,7 @@ func _physics_process(delta):
 	
 	# Tarcie
 	velocity -= velocity.normalized() * total_friction * delta
-	
-	# Prosty cien
-	$ShadowSlot.position = altitude * shadow_projection_vector
+	update_shadow()
 	
 	var collision = move_and_collide(velocity2D() * delta)
 	if collision:
@@ -105,6 +105,9 @@ func friction_scaler(v):
 	if v.length() < 900:
 		return 100 + v.length()
 	return 1000
+
+func update_shadow():
+	$ShadowSlot.global_position = global_position + altitude * shadow_projection_vector
 
 func update_collision_mask():
 	if grabber:

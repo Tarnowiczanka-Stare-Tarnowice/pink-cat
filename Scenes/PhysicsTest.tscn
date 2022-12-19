@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Dummy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/ProjectileSpawner.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scripts/PhysicsTest.gd" type="Script" id=5]
 [ext_resource path="res://icon.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/NailGun.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/DestructibleDummy.tscn" type="PackedScene" id=8]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 5 )
@@ -94,3 +95,37 @@ mass = 5.0
 
 [node name="NailGun" parent="." instance=ExtResource( 7 )]
 position = Vector2( 300, 285 )
+
+[node name="DestructibleDummy" parent="." instance=ExtResource( 8 )]
+position = Vector2( 536, 443 )
+
+[node name="DestructibleDummy2" parent="." instance=ExtResource( 8 )]
+modulate = Color( 0.886275, 0.282353, 0.282353, 1 )
+position = Vector2( 556, 382 )
+bounciness = 0.047
+
+[node name="DestructibleDummy3" parent="." instance=ExtResource( 8 )]
+modulate = Color( 0.701961, 0.843137, 0.309804, 1 )
+position = Vector2( 567, 313 )
+bounciness = 0.951
+
+[node name="DestructibleDummy5" parent="." instance=ExtResource( 8 )]
+position = Vector2( 522, 507 )
+
+[node name="DestructibleDummy6" parent="." instance=ExtResource( 8 )]
+position = Vector2( 454, 547 )
+
+[node name="DestructibleDummy7" parent="." instance=ExtResource( 8 )]
+position = Vector2( 395, 556 )
+
+[node name="DestructibleDummy8" parent="." instance=ExtResource( 8 )]
+position = Vector2( 321, 559 )
+
+[node name="DestructibleDummy10" parent="." instance=ExtResource( 8 )]
+position = Vector2( 719, 302 )
+
+[node name="DestructibleDummy9" parent="." instance=ExtResource( 8 )]
+position = Vector2( 736, 246 )
+
+[node name="DestructibleDummy4" parent="." instance=ExtResource( 8 )]
+position = Vector2( 384, 496 )

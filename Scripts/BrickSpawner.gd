@@ -1,11 +1,12 @@
 extends Node2D
 
-export(PackedScene) var projectile;# = preload("res://Scenes/Brick.tscn")
+export(PackedScene) var projectile;
 export var velocity_const = 0
 export var velocity_scaling_with_distance = 2.0
 export var altitude = 100
 export var accuracy_degrees = 0.0
 
+# Wysyłany po stworzeniu obiektu, jako argument przekazywana jest instancja nowego obiektu 
 signal spawned
 
 # Called when the node enters the scene tree for the first time.
@@ -20,6 +21,7 @@ func _process(_delta):
 func spawn():
 	var inst = projectile.instance()
 	
+	# Obliczenia prędkości - spawnowanie w stronę kursora
 	var d = get_global_mouse_position()-global_position
 	d = d.rotated(deg2rad((randf()-0.5) * 2*accuracy_degrees))
 	

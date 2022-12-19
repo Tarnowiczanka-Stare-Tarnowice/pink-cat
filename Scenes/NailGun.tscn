@@ -11,8 +11,8 @@ radius = 18.0
 
 [node name="NailGun" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
-bullets_per_second = 10
-continuous_fire = false
+bullets_per_second = 20
+continuous_fire = true
 
 [node name="Polygon2D" type="Polygon2D" parent="ShadowSlot" index="0"]
 position = Vector2( -0.177767, 0.5 )
@@ -29,7 +29,7 @@ position = Vector2( -13, 0 )
 rotation = 1.57079
 scale = Vector2( 0.5625, 0.171875 )
 projectile = ExtResource( 5 )
-velocity_const = 1000
+velocity_const = 1500
 velocity_scaling_with_distance = 0.0
 accuracy_degrees = 2.0
 

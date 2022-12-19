@@ -8,8 +8,9 @@ radius = 3.16228
 
 [node name="Destructible" instance=ExtResource( 1 )]
 mass = 0.15
-max_hp = 10.0
-dps_on_floor = 5.0
+force_damage_scaler = 0.0005
+max_hp = 2.0
+dps_on_floor = 0.6
 
 [node name="Icon" type="Sprite" parent="ShadowSlot" index="0"]
 modulate = Color( 0, 0, 0, 0.372549 )
