@@ -9,6 +9,8 @@ export var friction: float = 3
 export var tall: bool = false
 var grabber: Node2D = null
 
+class_name PhysicsObject
+
 # Reguluje pozycję węzła cienia. Aby dodać cień, należy wrzucić jego grafikę jako dziecko węzła ShadowSlot
 const shadow_projection_vector = Vector2(0.2, 0.1)
 const gravity = 980.0
@@ -72,8 +74,9 @@ func _physics_process(delta):
 			
 
 
-func grab(parent: Node2D):
+func grab(parent: Node2D) -> PhysicsObject:
 	grabber = parent
+	return self
 
 func velocity2D():
 	return Vector2(velocity.x, velocity.y)
