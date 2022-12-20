@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Dummy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/BrickSpawner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/ProjectileSpawner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/HandManipulator.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Brick.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/PhysicsTest.gd" type="Script" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/NailGun.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/DestructibleDummy.tscn" type="PackedScene" id=8]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 771, 482 )
@@ -58,3 +65,67 @@ rotation = -3.12282
 
 [node name="BrickSpawner" parent="." instance=ExtResource( 2 )]
 position = Vector2( 209, 307 )
+projectile = ExtResource( 4 )
+accuracy_degrees = 5.0
+
+[node name="Icon2" type="Sprite" parent="BrickSpawner"]
+modulate = Color( 0.87451, 1, 0, 1 )
+position = Vector2( 0, 2.98023e-08 )
+scale = Vector2( 0.125, 0.125 )
+texture = ExtResource( 6 )
+
+[node name="HandManipulator" parent="." instance=ExtResource( 3 )]
+position = Vector2( 277, 349 )
+rotation = -0.813188
+
+[node name="HandManipulator2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 258, 364 )
+rotation = 2.31852
+left_hand = true
+
+[node name="Brick" parent="." instance=ExtResource( 4 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 355, 366 )
+mass = 12.0
+
+[node name="Brick2" parent="." instance=ExtResource( 4 )]
+modulate = Color( 0.345098, 0.345098, 0.345098, 1 )
+position = Vector2( 348, 317 )
+mass = 5.0
+
+[node name="NailGun" parent="." instance=ExtResource( 7 )]
+position = Vector2( 300, 285 )
+
+[node name="DestructibleDummy" parent="." instance=ExtResource( 8 )]
+position = Vector2( 536, 443 )
+
+[node name="DestructibleDummy2" parent="." instance=ExtResource( 8 )]
+modulate = Color( 0.886275, 0.282353, 0.282353, 1 )
+position = Vector2( 556, 382 )
+bounciness = 0.047
+
+[node name="DestructibleDummy3" parent="." instance=ExtResource( 8 )]
+modulate = Color( 0.701961, 0.843137, 0.309804, 1 )
+position = Vector2( 567, 313 )
+bounciness = 0.951
+
+[node name="DestructibleDummy5" parent="." instance=ExtResource( 8 )]
+position = Vector2( 522, 507 )
+
+[node name="DestructibleDummy6" parent="." instance=ExtResource( 8 )]
+position = Vector2( 454, 547 )
+
+[node name="DestructibleDummy7" parent="." instance=ExtResource( 8 )]
+position = Vector2( 395, 556 )
+
+[node name="DestructibleDummy8" parent="." instance=ExtResource( 8 )]
+position = Vector2( 321, 559 )
+
+[node name="DestructibleDummy10" parent="." instance=ExtResource( 8 )]
+position = Vector2( 719, 302 )
+
+[node name="DestructibleDummy9" parent="." instance=ExtResource( 8 )]
+position = Vector2( 736, 246 )
+
+[node name="DestructibleDummy4" parent="." instance=ExtResource( 8 )]
+position = Vector2( 384, 496 )

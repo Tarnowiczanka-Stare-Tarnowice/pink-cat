@@ -7,6 +7,7 @@ export var bounciness: float = 0.4
 export var friction: float = 3
 # Gdy ustawiona, obiekt na ziemi będzie kolidował z obiektami w powietrzu
 export var tall: bool = false
+var grabber: Node2D = null
 
 # Reguluje pozycję węzła cienia. Aby dodać cień, należy wrzucić jego grafikę jako dziecko węzła ShadowSlot
 const shadow_projection_vector = Vector2(0.2, 0.1)
@@ -18,6 +19,7 @@ const aerial_collision_mask = 2;
 const ground_collision_layer = 1;
 const ground_collision_mask = 1;
 
+# Wysyłany po zderzeniu, argumenty - self, force
 signal hit
 
 
@@ -30,6 +32,12 @@ func _ready():
 #	pass
 
 func _physics_process(delta):
+	
+	if grabber:
+		global_position = grabber.global_position
+		update_collision_mask()
+		update_shadow()
+		return
 	
 	var total_friction = 0
 	
@@ -47,9 +55,7 @@ func _physics_process(delta):
 	
 	# Tarcie
 	velocity -= velocity.normalized() * total_friction * delta
-	
-	# Prosty cien
-	$ShadowSlot.position = altitude * shadow_projection_vector
+	update_shadow()
 	
 	var collision = move_and_collide(velocity2D() * delta)
 	if collision:
@@ -63,14 +69,18 @@ func _physics_process(delta):
 			# Zapisanie wektora 2D do komponentów x,y wektora 3D
 			velocity.x = newv.x
 			velocity.y = newv.y
+			
 
 
+func grab(parent: Node2D):
+	grabber = parent
 
 func velocity2D():
 	return Vector2(velocity.x, velocity.y)
 
-func throw(new_velocity):
+func throw(new_velocity: Vector3):
 	velocity = new_velocity
+	grabber = null
 
 # Obsługa kolizji dwóch obiektów. Modyfikuje prędkość samego siebie i zwraca prędkość drugiego obiektu
 # Źródła:
@@ -90,21 +100,25 @@ func hit(other_velocity: Vector3, other_mass: float, other_bounciness: float, ot
 	emit_signal("hit", self, mass * (velocity - v1).length_squared()/2);
 	return v2 - (1+cr)*m1/(m1+m2) * (v2-v1).dot(-n) / n.length() / n.length() * -n
 
-
 # Ewentualne skalowanie tarcia dla ładniejszego efektu
 func friction_scaler(v):
 	if v.length() < 900:
 		return 100 + v.length()
 	return 1000
 
+func update_shadow():
+	$ShadowSlot.global_position = global_position + altitude * shadow_projection_vector
+
 func update_collision_mask():
-	if tall:
-		collision_layer = ground_collision_layer | aerial_collision_layer
-		collision_mask = ground_collision_mask | aerial_collision_mask
-	elif altitude <= 0:
-		collision_layer = ground_collision_layer
-		collision_mask = ground_collision_mask
-	else:
+	if grabber:
+		collision_layer = 0
+		collision_mask = 0
+	elif altitude > 0:
 		collision_layer = aerial_collision_layer
 		collision_mask = aerial_collision_mask
-	
+	elif tall:
+		collision_layer = ground_collision_layer | aerial_collision_layer
+		collision_mask = ground_collision_mask | aerial_collision_mask
+	else:
+		collision_layer = ground_collision_layer
+		collision_mask = ground_collision_mask
