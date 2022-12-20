@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Procedural_Animator",
+"language": "GDScript",
+"path": "res://Scripts/Animator_proceduralny.gd"
+} ]
+_global_script_class_icons={
+"Procedural_Animator": ""
+}
+
 [application]
 
 config/name="Pink Cat"
