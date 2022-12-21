@@ -138,7 +138,7 @@ func get_grab_target():
 
 
 func _on_Hand_body_entered(body):
-	if not grab_targets.has(body) and body.has_method("grab") and body.has_method("throw"):
+	if not grab_targets.has(body) and body.has_method("grab"):
 		grab_targets.append(body)
 
 
