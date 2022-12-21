@@ -1,16 +1,20 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Mech.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Artwork/bot01/torso01.png" type="Texture" id=3]
 [ext_resource path="res://Artwork/bot01/Leg 3.png" type="Texture" id=4]
 [ext_resource path="res://Artwork/bot01/head01.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/HandManipulator.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Artwork/bot01/Leg 2.png" type="Texture" id=7]
+[ext_resource path="res://Artwork/bot01/Leg 1.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/Leg_Segment_Animator.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 64 )
 
 [node name="Mech" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 1 )
 speed = 50000.0
 limb_movement_speed = 750.0
@@ -71,26 +75,6 @@ position = Vector2( 100, 100 )
 [node name="BL_Target" type="Position2D" parent="LimbTargets"]
 position = Vector2( -100, 100 )
 
-[node name="Arm" type="Node2D" parent="."]
-position = Vector2( 0, -150 )
-
-[node name="Gripper_tgt" type="Node2D" parent="Arm"]
-position = Vector2( -100, 0 )
-
-[node name="Sprite2" type="Sprite" parent="Arm/Gripper_tgt"]
-visible = false
-modulate = Color( 0.172549, 0, 1, 1 )
-scale = Vector2( 0.368597, 0.368597 )
-texture = ExtResource( 2 )
-
-[node name="Gripper" type="Node2D" parent="Arm"]
-position = Vector2( -100, 0 )
-
-[node name="Sprite" type="Sprite" parent="Arm/Gripper"]
-modulate = Color( 1, 0, 0, 1 )
-scale = Vector2( 0.368597, 0.368597 )
-texture = ExtResource( 2 )
-
 [node name="HandLeft" parent="." instance=ExtResource( 6 )]
 position = Vector2( 60, 0 )
 left_hand = true
@@ -98,3 +82,101 @@ left_hand = true
 [node name="HandRight" parent="." instance=ExtResource( 6 )]
 position = Vector2( -60, 0 )
 rotation = 3.14159
+
+[node name="LimbSegments" type="Node2D" parent="."]
+
+[node name="FR_Segments" type="Node2D" parent="LimbSegments"]
+position = Vector2( 50, -40 )
+script = ExtResource( 9 )
+target_leg = NodePath("../../FR_Konczyna")
+
+[node name="LegEnd" type="Position2D" parent="LimbSegments/FR_Segments"]
+position = Vector2( 0, -85 )
+
+[node name="Segment_Fixed" type="Node2D" parent="LimbSegments/FR_Segments"]
+
+[node name="Segment_Stretching" type="Node2D" parent="LimbSegments/FR_Segments/Segment_Fixed"]
+position = Vector2( 0, -40 )
+
+[node name="Leg1" type="Sprite" parent="LimbSegments/FR_Segments/Segment_Fixed/Segment_Stretching"]
+position = Vector2( 2.5, -20 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 8 )
+
+[node name="Leg2" type="Sprite" parent="LimbSegments/FR_Segments/Segment_Fixed"]
+position = Vector2( 0, -7.62939e-06 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 7 )
+offset = Vector2( -0.5, -3 )
+
+[node name="FL_Segments" type="Node2D" parent="LimbSegments"]
+position = Vector2( -50, -40 )
+script = ExtResource( 9 )
+target_leg = NodePath("../../FL_Konczyna")
+
+[node name="LegEnd" type="Position2D" parent="LimbSegments/FL_Segments"]
+position = Vector2( 0, -85 )
+
+[node name="Segment_Fixed" type="Node2D" parent="LimbSegments/FL_Segments"]
+
+[node name="Segment_Stretching" type="Node2D" parent="LimbSegments/FL_Segments/Segment_Fixed"]
+position = Vector2( 0, -40 )
+
+[node name="Leg1" type="Sprite" parent="LimbSegments/FL_Segments/Segment_Fixed/Segment_Stretching"]
+position = Vector2( 2.5, -20 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 8 )
+
+[node name="Leg2" type="Sprite" parent="LimbSegments/FL_Segments/Segment_Fixed"]
+position = Vector2( 0, -7.62939e-06 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 7 )
+offset = Vector2( -0.5, -3 )
+
+[node name="BR_Segments" type="Node2D" parent="LimbSegments"]
+position = Vector2( 50, 46 )
+script = ExtResource( 9 )
+target_leg = NodePath("../../BR_Konczyna")
+
+[node name="LegEnd" type="Position2D" parent="LimbSegments/BR_Segments"]
+position = Vector2( 0, -85 )
+
+[node name="Segment_Fixed" type="Node2D" parent="LimbSegments/BR_Segments"]
+
+[node name="Segment_Stretching" type="Node2D" parent="LimbSegments/BR_Segments/Segment_Fixed"]
+position = Vector2( 0, -40 )
+
+[node name="Leg1" type="Sprite" parent="LimbSegments/BR_Segments/Segment_Fixed/Segment_Stretching"]
+position = Vector2( 2.5, -20 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 8 )
+
+[node name="Leg2" type="Sprite" parent="LimbSegments/BR_Segments/Segment_Fixed"]
+position = Vector2( 0, -7.62939e-06 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 7 )
+offset = Vector2( -0.5, -3 )
+
+[node name="BL_Segments" type="Node2D" parent="LimbSegments"]
+position = Vector2( -50, 46 )
+script = ExtResource( 9 )
+target_leg = NodePath("../../BL_Konczyna")
+
+[node name="LegEnd" type="Position2D" parent="LimbSegments/BL_Segments"]
+position = Vector2( 0, -85 )
+
+[node name="Segment_Fixed" type="Node2D" parent="LimbSegments/BL_Segments"]
+
+[node name="Segment_Stretching" type="Node2D" parent="LimbSegments/BL_Segments/Segment_Fixed"]
+position = Vector2( 0, -40 )
+
+[node name="Leg1" type="Sprite" parent="LimbSegments/BL_Segments/Segment_Fixed/Segment_Stretching"]
+position = Vector2( 2.5, -20 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 8 )
+
+[node name="Leg2" type="Sprite" parent="LimbSegments/BL_Segments/Segment_Fixed"]
+position = Vector2( 0, -7.62939e-06 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 7 )
+offset = Vector2( -0.5, -3 )
