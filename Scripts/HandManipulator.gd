@@ -56,11 +56,17 @@ func _process(delta):
 	# ---------------------
 	if angle > rest_begin_angle_degrees and angle < rest_end_angle_degrees: # Tryb śledzenia
 		rest_time = 0
-		var new_angle = clamp(angle, active_begin_angle_degrees, active_end_angle_degrees)
-		mouse_relative_position = mouse_relative_position.rotated(deg2rad(new_angle - angle))
+		#var new_angle = clamp(angle, active_begin_angle_degrees, active_end_angle_degrees)
+		#mouse_relative_position = mouse_relative_position.rotated(deg2rad(new_angle - angle))
 		
 		if mouse_relative_position.length() > hand_range:
 			mouse_relative_position = mouse_relative_position.normalized() * hand_range
+		if angle < active_begin_angle_degrees:
+			var proj_line = Vector2(1,0).rotated(deg2rad(active_begin_angle_degrees))
+			mouse_relative_position = mouse_relative_position.project(proj_line)
+		if angle > active_end_angle_degrees:
+			var proj_line = Vector2(1,0).rotated(deg2rad(active_end_angle_degrees))
+			mouse_relative_position = mouse_relative_position.project(proj_line)
 		
 	else: # Tryb spoczynku
 		var lerp_coeff = delta * max(0, rest_time - REST_BEGIN_TIME) * REST_SPEED_COEFFICIENT
@@ -79,9 +85,13 @@ func _process(delta):
 	$Hand.position = $Hand.position.move_toward(mouse_relative_position, delta * hand_speed)
 	hand_speed = $Hand.position.distance_to(old_position) / delta
 	
-	throw_force_samples[throw_force_samples_current] = hand_speed;
+	var pos_delta_direction = ($Hand.position - old_position).normalized()
+	
+	# TOneverDO - prawdziwa globalna prędkość
+	var global_velocity = (get_parent().velocity2D() if get_parent().has_method("velocity2D") else Vector2(0,0))
+	throw_force_samples[throw_force_samples_current] = (hand_speed * pos_delta_direction + global_velocity).length()
 	throw_force_samples_current = (throw_force_samples_current + 1) % throw_force_samples.size()
-	var throw_force = throw_force_samples.max();
+	var throw_force = throw_force_samples.max()
 	
 	# Aktualizacja rotacji/wysokości przedmiotu
 	# -----------------------
