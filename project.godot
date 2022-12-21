@@ -9,12 +9,30 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Destructible",
+"language": "GDScript",
+"path": "res://Scripts/Destructible.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "PhysicsObject",
+"language": "GDScript",
+"path": "res://Scripts/PhysicsObject.gd"
+}, {
+"base": "Node2D",
+"class": "Pile",
+"language": "GDScript",
+"path": "res://Scripts/Pile.gd"
+}, {
 "base": "Node",
 "class": "Procedural_Animator",
 "language": "GDScript",
 "path": "res://Scripts/Animator_proceduralny.gd"
 } ]
 _global_script_class_icons={
+"Destructible": "",
+"PhysicsObject": "",
+"Pile": "",
 "Procedural_Animator": ""
 }
 
