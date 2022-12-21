@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Mech.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Looker_Atter.gd" type="Script" id=2]
 [ext_resource path="res://Artwork/bot01/torso01.png" type="Texture" id=3]
 [ext_resource path="res://Artwork/bot01/Leg 3.png" type="Texture" id=4]
 [ext_resource path="res://Artwork/bot01/head01.png" type="Texture" id=5]
@@ -29,6 +30,8 @@ texture = ExtResource( 3 )
 [node name="Head01" type="Sprite" parent="Head"]
 scale = Vector2( 6, 6 )
 texture = ExtResource( 5 )
+script = ExtResource( 2 )
+dir_correction = -1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

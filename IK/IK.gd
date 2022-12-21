@@ -59,7 +59,9 @@ func single_solve(target):
 	for i in range (0, test_array.size()):
 		joint_array[i].global_position = test_array[i]
 		
-		
+	for i in range (test_array.size() - 2, 0, -1):
+		joint_array[i].look_at(joint_array[i-1].global_position)
+		joint_array[i].rotate(-PI/2)
 			
 		
 	

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/head01.png-f0bf9466049908f5323b7b84d5e021ca.stex"
+path="res://.import/armsegment.png-2ea560b8cccef6582895167a75dbb78e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Artwork/bot01/head01.png"
-dest_files=[ "res://.import/head01.png-f0bf9466049908f5323b7b84d5e021ca.stex" ]
+source_file="res://Artwork/bot01/armsegment.png"
+dest_files=[ "res://.import/armsegment.png-2ea560b8cccef6582895167a75dbb78e.stex" ]
 
 [params]
 
@@ -24,7 +24,7 @@ flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
