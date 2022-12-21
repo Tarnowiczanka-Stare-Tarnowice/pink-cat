@@ -34,7 +34,7 @@ velocity_scaling_with_distance = 0.0
 accuracy_degrees = 2.0
 
 [node name="Nailgun" type="Sprite" parent="." index="3"]
-position = Vector2( -4, 0 )
-rotation = -1.57079
+position = Vector2( 10, 0 )
+rotation = -4.71238
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
