@@ -67,7 +67,8 @@ func _physics_process(delta):
 		else: # Proste odbicie się jak od ściany z zadaną sprężystością
 			var newv = velocity2D().bounce(collision.normal)
 			newv -= newv.project(collision.normal) * (1-bounciness)
-		
+			emit_signal("hit", self, mass * velocity.length_squared()/2)
+			
 			# Zapisanie wektora 2D do komponentów x,y wektora 3D
 			velocity.x = newv.x
 			velocity.y = newv.y
