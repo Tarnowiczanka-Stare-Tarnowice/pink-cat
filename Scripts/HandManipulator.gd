@@ -117,8 +117,8 @@ func _process(delta):
 			grabbed = null
 		elif grab_targets.size() > 0:
 			grabbed = get_grab_target()
-			if grabbed.mass <= max_carried_item_mass:
-				grabbed.grab($Hand)
+			if not("mass" in grabbed) or grabbed.mass <= max_carried_item_mass:
+				grabbed = grabbed.grab($Hand)
 			else:
 				grabbed = null
 		
@@ -138,7 +138,7 @@ func get_grab_target():
 
 
 func _on_Hand_body_entered(body):
-	if not grab_targets.has(body) and body.has_method("grab") and body.has_method("throw"):
+	if not grab_targets.has(body) and body.has_method("grab"):
 		grab_targets.append(body)
 
 
