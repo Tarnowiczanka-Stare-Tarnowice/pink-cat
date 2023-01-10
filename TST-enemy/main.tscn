@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://player.gd" type="Script" id=2]
+[ext_resource path="res://enemies/enemy.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 33, 32.5 )
+
+[sub_resource type="NavigationPolygon" id=3]
+vertices = PoolVector2Array( 328, 546, 34, 573, 31, 43, 331, 242, 351, 30, 349, 152, 412, 239, 414, 152, 952, 284, 951, 548, 776, 544, 774, 419, 851, 249, 415, 29, 724, 31, 723, 127, 534, 122, 528, 238, 653, 547, 414, 543, 664, 413, 955, 71, 854, 129, 955, 34, 724, 31 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 3, 2, 4, 5 ), PoolIntArray( 6, 3, 5, 7 ), PoolIntArray( 8, 9, 10, 11, 12 ), PoolIntArray( 13, 14, 15, 16 ), PoolIntArray( 7, 13, 16, 17 ), PoolIntArray( 18, 19, 6, 7, 17, 20 ), PoolIntArray( 20, 17, 12, 11 ), PoolIntArray( 21, 8, 12, 22, 23 ), PoolIntArray( 23, 22, 15, 24 ) ]
+outlines = [ PoolVector2Array( 31, 43, 34, 573, 328, 546, 331, 242, 412, 239, 414, 543, 653, 547, 664, 413, 774, 419, 776, 544, 951, 548, 952, 284, 955, 71, 955, 34, 724, 31, 723, 127, 854, 129, 851, 249, 528, 238, 534, 122, 723, 127, 724, 31, 415, 29, 414, 152, 349, 152, 351, 30 ) ]
+
+[sub_resource type="CircleShape2D" id=2]
+
+[node name="Node" type="Node"]
+
+[node name="player" type="Area2D" parent="." groups=["Player"]]
+position = Vector2( 290, 233 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="player"]
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2( 0, -0.5 )
+shape = SubResource( 1 )
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+edge_connection_margin = 20.0
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+navpoly = SubResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="Navigation2D"]
+position = Vector2( 723, 336 )
+script = ExtResource( 3 )
+path_to_player = NodePath("../../player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Navigation2D/KinematicBody2D"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Navigation2D/KinematicBody2D"]
+modulate = Color( 1, 0, 0, 1 )
+texture = ExtResource( 1 )
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation2D/KinematicBody2D"]
+
+[node name="Timer" type="Timer" parent="Navigation2D/KinematicBody2D"]
+wait_time = 0.1
+autostart = true
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 373, 403 )
+scale = Vector2( 0.953124, 4.35938 )
+texture = ExtResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 384, 81 )
+scale = Vector2( 0.640625, 1.6875 )
+texture = ExtResource( 1 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 693, 185 )
+scale = Vector2( 4.375, 1.20313 )
+texture = ExtResource( 1 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( 716, 488 )
+scale = Vector2( 1.375, 1.60938 )
+texture = ExtResource( 1 )
