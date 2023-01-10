@@ -8,9 +8,6 @@ script/source = "extends Destructible
 export var max_force = 10000;
 export var radius = 100;
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
 onready var explosion = preload(\"res://Scenes/Explosion.tscn\")
 
 # Called when the node enters the scene tree for the first time.
@@ -23,8 +20,6 @@ func explode():
 	inst.max_force = max_force
 	inst.set_radius(radius)
 	get_tree().get_root().add_child(inst)
-	#queue_free()
-	print(\"Boom\")
 
 func _on_Explosive_death(_self):
 	explode()

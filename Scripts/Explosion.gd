@@ -8,6 +8,7 @@ var explode_now = false
 func _ready():
 	$CollisionShape2D.shape.radius = radius
 
+# Funkcja skalująca siłę wybuchu, zmienić według upodobania
 func force_falloff(distance):
 	return pow(lerp(0, sqrt(max_force), distance/radius), 2)
 
@@ -16,6 +17,7 @@ func set_radius(new_radius):
 	$CollisionShape2D.shape.radius = radius
 
 func _process(_delta):
+	# Wymagana 1 klatka opóźnienia by upewnić się, że kolizje będą poprawnie obsłużone
 	if not explode_now:
 		explode_now = true
 		return

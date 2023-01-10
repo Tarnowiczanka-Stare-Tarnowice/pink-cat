@@ -4,7 +4,7 @@ export var pointer_coefficient = 0.2
 export var move_inertia_coefficient = 0.92
 
 var move_inertia = Vector2(0,0)
-var previous_position = global_position
+onready var previous_position = global_position
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
