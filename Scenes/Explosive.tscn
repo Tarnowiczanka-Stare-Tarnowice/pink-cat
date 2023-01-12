@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Destructible.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Destructible
+
+export var max_force = 10000;
+export var radius = 100;
+
+onready var explosion = preload(\"res://Scenes/Explosion.tscn\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func explode():
+	var inst = explosion.instance()
+	inst.global_position = global_position
+	inst.max_force = max_force
+	inst.set_radius(radius)
+	get_tree().get_root().add_child(inst)
+
+func _on_Explosive_death(_self):
+	explode()
+"
+
+[node name="Explosive" instance=ExtResource( 1 )]
+script = SubResource( 1 )
+max_force = 10000
+radius = 100
+
+[connection signal="death" from="." to="." method="_on_Explosive_death"]
