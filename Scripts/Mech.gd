@@ -26,6 +26,10 @@ export (float) var dampening := 0.5# = 0.75
 export (float) var anticipation := 2# = 0
 var proc_anim : Procedural_Animator
 
+export var max_hp = 500
+
+onready var hp = max_hp
+
 export (bool) var testing_movement = false
 
 func _ready():
