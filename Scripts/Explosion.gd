@@ -10,7 +10,7 @@ func _ready():
 
 # Funkcja skalująca siłę wybuchu, zmienić według upodobania
 func force_falloff(distance):
-	return pow(lerp(0, sqrt(max_force), distance/radius), 2)
+	return pow(lerp(0, (max_force), distance/radius), 1)
 
 func set_radius(new_radius):
 	radius = new_radius
@@ -28,5 +28,5 @@ func _process(_delta):
 			var d = pos_relative.length()
 			var force = pos_relative.normalized() * force_falloff(d)
 			
-			i.hit(Vector3(force.x, force.y, 0), 1, 1, force.normalized())
+			i.hit(Vector3(force.x, force.y, 100), 1, 1, force.normalized())
 	queue_free()

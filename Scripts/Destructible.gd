@@ -1,8 +1,8 @@
 extends "res://Scripts/PhysicsObject.gd"
 class_name Destructible
 
-export var force_damage_scaler = 0.0005
-export var min_damaging_force = 1000
+export var force_damage_scaler = 0.2
+export var min_damaging_force = 100
 
 export var penetration_damage = 0.0
 export var max_hp = 100.0

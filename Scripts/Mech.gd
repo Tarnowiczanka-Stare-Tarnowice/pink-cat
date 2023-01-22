@@ -26,7 +26,12 @@ export (float) var dampening := 0.5# = 0.75
 export (float) var anticipation := 2# = 0
 var proc_anim : Procedural_Animator
 
-export var max_hp = 500
+export var max_hp = 500.0
+export var mass = 5
+export var bounciness = 0.6
+export var force_damage_scaler = 0.15
+export var min_damaging_force = 200
+var velocity = Vector3.ZERO
 
 onready var hp = max_hp
 
@@ -53,19 +58,29 @@ func _ready():
 
 
 func _process(delta):
+	var old_position = global_position
 	for i in limbs.size():
 		limb_positions[i] = limbs[i].global_position #rozwiazuje problemy z fizyka
 	
+	if hp > 0:
+		modulate = Color(1.0, 1.0, 1.0)
+	else:
+		$Head/Head01.enable = false
+		$HandLeft.enable = false
+		$HandRight.enable = false
+		modulate = Color(0.5, 0.5, 0.5)
+	
 	
 	var movement := Vector2.ZERO
-	if Input.is_action_pressed("ui_right"):
-		movement.x += 1
-	if Input.is_action_pressed("ui_left"):
-		movement.x += -1
-	if Input.is_action_pressed("ui_up"):
-		movement.y += -1
-	if Input.is_action_pressed("ui_down"):
-		movement.y += 1
+	if hp > 0:
+		if Input.is_action_pressed("ui_right"):
+			movement.x += 1
+		if Input.is_action_pressed("ui_left"):
+			movement.x += -1
+		if Input.is_action_pressed("ui_up"):
+			movement.y += -1
+		if Input.is_action_pressed("ui_down"):
+			movement.y += 1
 	
 	movement = movement.normalized() * speed * delta #czasami sie buguje, nie wiem czemu
 	
@@ -116,6 +131,9 @@ func _process(delta):
 				limb_movement_midpoints[i] = lerp(limb_positions[i], limb_targets[i].global_position, 0.5)
 		
 		limbs[i].global_position = limb_positions[i]
+	
+	var v2 = (global_position - old_position) * delta
+	velocity = Vector3(v2.x, v2.y, 0)
 
 func limb_scale(limb_index):
 	var scale_squared = 0
@@ -169,3 +187,25 @@ func neibhour_limbs_are_stationary(ix):
 	else:
 		other_limb_index_Y = ix - 2
 	return limb_moving[other_limb_index_X] <= 0 && limb_moving[other_limb_index_Y] <= 0
+
+# Zaadaptowana z PhysicsObject
+func hit(other_velocity: Vector3, other_mass: float, other_bounciness: float, other_normal: Vector2) -> Vector3:
+	var m1 = mass
+	var m2 = other_mass
+	var v1 = Vector3(velocity.x, velocity.y, 0)
+	var v2 = other_velocity
+	# Można ewentualnie poeksperymentować z cr - współczynnikiem sprężystości odbicia
+	var cr = (bounciness + other_bounciness)/2
+	var n = Vector3(other_normal.x, other_normal.y, 0)
+	
+	# TODO warto imo zrobić lekką wizualną reakcję mecha na uderzenie
+	var new_velocity = v1 - (1+cr)*m2/(m1+m2) * (v1-v2).dot(n) / n.length() / n.length() * n
+	#emit_signal("hit", self, mass * (velocity - v1).length_squared()/2);
+	
+	
+	v2 =  v2 - (1+cr)*m1/(m1+m2) * (v2-v1).dot(-n) / n.length() / n.length() * -n
+
+	var force = mass * (new_velocity - v1).length()/2
+	hp -= max(0, force - min_damaging_force) * force_damage_scaler
+	
+	return v2

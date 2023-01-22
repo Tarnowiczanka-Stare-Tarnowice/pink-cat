@@ -10,7 +10,7 @@ radius = 28.0
 mass = 3.0
 bounciness = 0.6
 tall = true
-max_force = 2000
+max_force = 1000
 radius = 200
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShadowSlot" index="0"]

@@ -18,6 +18,8 @@ export var REST_SPEED_COEFFICIENT = 2.0
 export var REST_EASE_COEFFICIENT = 0.5
 export var REST_BEGIN_TIME = 2
 
+export var enable = true
+
 var rest_time = 0
 var rest_state_position
 var throw_action
@@ -48,6 +50,11 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	$IK.is_active = enable
+	$Hand/Sprite.enable = enable
+	if not enable:
+		return
 	
 	var mouse_relative_position = get_local_mouse_position()
 	var angle = rad2deg(mouse_relative_position.angle())

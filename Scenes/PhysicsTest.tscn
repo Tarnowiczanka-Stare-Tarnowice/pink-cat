@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Dummy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/ProjectileSpawner.tscn" type="PackedScene" id=2]
@@ -9,9 +9,20 @@
 [ext_resource path="res://Scenes/NailGun.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/DestructibleDummy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Mech.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/CameraController.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/ExplosiveBarrel.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Objects/Barrel.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Objects/ConcreteMixer.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Artwork/shelf2.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/Objects/Hammer.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Objects/Bucket.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=17]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 5 )
+
+[node name="HUD" parent="." instance=ExtResource( 17 )]
+mech_path = NodePath("../Mech")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 771, 482 )
@@ -61,7 +72,7 @@ rotation = -3.12282
 mass = 10.0
 
 [node name="Dummy" parent="." instance=ExtResource( 1 )]
-position = Vector2( 401, 78.0011 )
+position = Vector2( 479, 78 )
 rotation = -3.12282
 
 [node name="BrickSpawner" parent="." instance=ExtResource( 2 )]
@@ -87,43 +98,154 @@ mass = 5.0
 
 [node name="Mech" parent="." instance=ExtResource( 9 )]
 position = Vector2( 130, 287 )
+speed = 30000.0
+limb_movement_speed = 1400.0
+frequency = 2.5
+dampening = 1.0
+
+[node name="CameraController" parent="Mech" instance=ExtResource( 10 )]
 
 [node name="NailGun" parent="." instance=ExtResource( 7 )]
-position = Vector2( 300, 285 )
+position = Vector2( 306, 270 )
 
 [node name="DestructibleDummy" parent="." instance=ExtResource( 8 )]
 position = Vector2( 536, 443 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
 
 [node name="DestructibleDummy2" parent="." instance=ExtResource( 8 )]
 modulate = Color( 0.886275, 0.282353, 0.282353, 1 )
 position = Vector2( 556, 382 )
 bounciness = 0.047
+force_damage_scaler = 0.2
+min_damaging_force = 100
 
 [node name="DestructibleDummy3" parent="." instance=ExtResource( 8 )]
 modulate = Color( 0.701961, 0.843137, 0.309804, 1 )
 position = Vector2( 567, 313 )
 bounciness = 0.951
+force_damage_scaler = 0.2
+min_damaging_force = 100
 
 [node name="DestructibleDummy5" parent="." instance=ExtResource( 8 )]
 position = Vector2( 522, 507 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
 
 [node name="DestructibleDummy6" parent="." instance=ExtResource( 8 )]
 position = Vector2( 454, 547 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
 
 [node name="DestructibleDummy7" parent="." instance=ExtResource( 8 )]
 position = Vector2( 395, 556 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
 
 [node name="DestructibleDummy8" parent="." instance=ExtResource( 8 )]
 position = Vector2( 321, 559 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
 
 [node name="DestructibleDummy10" parent="." instance=ExtResource( 8 )]
 position = Vector2( 719, 302 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
 
 [node name="DestructibleDummy9" parent="." instance=ExtResource( 8 )]
 position = Vector2( 736, 246 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
 
 [node name="DestructibleDummy4" parent="." instance=ExtResource( 8 )]
 position = Vector2( 384, 496 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
 
 [node name="BrickPile" parent="." instance=ExtResource( 3 )]
 position = Vector2( 141, 433 )
+
+[node name="Brick8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 563, 69 )
+
+[node name="ExplosiveBarrel4" parent="." instance=ExtResource( 11 )]
+position = Vector2( 738, 96 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
+
+[node name="ExplosiveBarrel5" parent="." instance=ExtResource( 11 )]
+position = Vector2( 819, 850 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
+
+[node name="ExplosiveBarrel" parent="." instance=ExtResource( 11 )]
+position = Vector2( 329, 183 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
+
+[node name="ExplosiveBarrel2" parent="." instance=ExtResource( 11 )]
+position = Vector2( 272, 337 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
+
+[node name="Brick3" parent="." instance=ExtResource( 12 )]
+position = Vector2( 400, 224 )
+
+[node name="Brick4" parent="." instance=ExtResource( 12 )]
+position = Vector2( 429, 291 )
+
+[node name="Barrel2" parent="." instance=ExtResource( 13 )]
+position = Vector2( 312, -32 )
+
+[node name="Shelf2" type="Sprite" parent="."]
+position = Vector2( -66.5, 199 )
+scale = Vector2( 2.59375, 2.59375 )
+z_index = -2
+texture = ExtResource( 14 )
+
+[node name="Brick5" parent="." instance=ExtResource( 12 )]
+position = Vector2( 465, 237 )
+
+[node name="Barrel3" parent="." instance=ExtResource( 15 )]
+position = Vector2( 152, -2.99999 )
+rotation = 0.261799
+
+[node name="Barrel" parent="." instance=ExtResource( 15 )]
+position = Vector2( 45, -6 )
+rotation = -1.0472
+
+[node name="Barrel4" parent="." instance=ExtResource( 12 )]
+position = Vector2( -212, 206 )
+
+[node name="Barrel5" parent="." instance=ExtResource( 16 )]
+position = Vector2( 14, 28 )
+
+[node name="DestructibleDummy11" parent="." instance=ExtResource( 8 )]
+position = Vector2( 276, 765 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
+
+[node name="DestructibleDummy12" parent="." instance=ExtResource( 8 )]
+position = Vector2( 262, 829 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
+
+[node name="DestructibleDummy13" parent="." instance=ExtResource( 8 )]
+position = Vector2( 194, 869 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
+
+[node name="DestructibleDummy14" parent="." instance=ExtResource( 8 )]
+position = Vector2( 135, 878 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
+
+[node name="DestructibleDummy15" parent="." instance=ExtResource( 8 )]
+position = Vector2( 61, 881 )
+force_damage_scaler = 0.2
+min_damaging_force = 100
+
+[node name="DestructibleDummy16" parent="." instance=ExtResource( 8 )]
+position = Vector2( 124, 818 )
+force_damage_scaler = 0.2
+min_damaging_force = 100

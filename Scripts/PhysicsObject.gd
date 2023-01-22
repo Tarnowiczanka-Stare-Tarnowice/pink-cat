@@ -63,11 +63,11 @@ func _physics_process(delta):
 	if collision:
 		if collision.collider.has_method("hit"):
 			velocity = collision.collider.hit(velocity, mass, bounciness, collision.normal)
-			emit_signal("hit", self, mass * (velocity - collision.collider.velocity).length_squared()/2)
+			emit_signal("hit", self, mass * (velocity - collision.collider.velocity).length()/2)
 		else: # Proste odbicie się jak od ściany z zadaną sprężystością
 			var newv = velocity2D().bounce(collision.normal)
 			newv -= newv.project(collision.normal) * (1-bounciness)
-			emit_signal("hit", self, mass * velocity.length_squared()/2)
+			emit_signal("hit", self, mass * velocity.length()/2)
 			
 			# Zapisanie wektora 2D do komponentów x,y wektora 3D
 			velocity.x = newv.x
@@ -101,7 +101,7 @@ func hit(other_velocity: Vector3, other_mass: float, other_bounciness: float, ot
 	var n = Vector3(other_normal.x, other_normal.y, 0)
 	
 	velocity = v1 - (1+cr)*m2/(m1+m2) * (v1-v2).dot(n) / n.length() / n.length() * n
-	emit_signal("hit", self, mass * (velocity - v1).length_squared()/2);
+	emit_signal("hit", self, mass * (velocity - v1).length()/2);
 	return v2 - (1+cr)*m1/(m1+m2) * (v2-v1).dot(-n) / n.length() / n.length() * -n
 
 # Ewentualne skalowanie tarcia dla ładniejszego efektu
