@@ -183,3 +183,9 @@ position = Vector2( 0, -7.62939e-06 )
 scale = Vector2( 5, 5 )
 texture = ExtResource( 7 )
 offset = Vector2( -0.5, -3 )
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]

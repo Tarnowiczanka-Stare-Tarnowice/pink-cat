@@ -34,6 +34,7 @@ export var min_damaging_force = 200
 var velocity = Vector3.ZERO
 
 onready var hp = max_hp
+onready var last_checkpoint = global_position
 
 export (bool) var testing_movement = false
 
@@ -65,11 +66,13 @@ func _process(delta):
 	if hp > 0:
 		modulate = Color(1.0, 1.0, 1.0)
 	else:
-		$Head/Head01.enable = false
-		$HandLeft.enable = false
-		$HandRight.enable = false
 		modulate = Color(0.5, 0.5, 0.5)
+		if $RespawnTimer.is_stopped():
+			$RespawnTimer.start()
 	
+	$Head/Head01.enable = hp > 0
+	$HandLeft.enable = hp > 0
+	$HandRight.enable = hp > 0
 	
 	var movement := Vector2.ZERO
 	if hp > 0:
@@ -209,3 +212,11 @@ func hit(other_velocity: Vector3, other_mass: float, other_bounciness: float, ot
 	hp -= max(0, force - min_damaging_force) * force_damage_scaler
 	
 	return v2
+
+func set_checkpoint(pos):
+	last_checkpoint = pos
+
+
+func _on_RespawnTimer_timeout():
+	global_position = last_checkpoint
+	hp = max_hp
