@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Crab Rave (2022) [8 Bit Tribute to Noisestorm] - 8 Bit Universe.mp3-cc260aec9ab523f5ebfeb5a885f4c852.mp3str"
+
+[deps]
+
+source_file="res://UI/Menu/Crab Rave (2022) [8 Bit Tribute to Noisestorm] - 8 Bit Universe.mp3"
+dest_files=[ "res://.import/Crab Rave (2022) [8 Bit Tribute to Noisestorm] - 8 Bit Universe.mp3-cc260aec9ab523f5ebfeb5a885f4c852.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
