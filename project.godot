@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Checkpoint",
+"language": "GDScript",
+"path": "res://Scripts/Checkpoint.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Destructible",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Animator_proceduralny.gd"
 } ]
 _global_script_class_icons={
+"Checkpoint": "",
 "Destructible": "",
 "PhysicsObject": "",
 "Pile": "",
