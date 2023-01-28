@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/X2Download.app - Tacy Sami - Lady Pank 8-bit cover (128 kbps).mp3-988285afffdc2621243718473598525b.mp3str"
+
+[deps]
+
+source_file="res://X2Download.app - Tacy Sami - Lady Pank 8-bit cover (128 kbps).mp3"
+dest_files=[ "res://.import/X2Download.app - Tacy Sami - Lady Pank 8-bit cover (128 kbps).mp3-988285afffdc2621243718473598525b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -16,7 +16,6 @@ antialiased = true
 polygon = PoolVector2Array( -31, 0, -22, -21, 0, -31, 24, -19, 31.6184, -0.885715, 23, 20, 0, 31, -21, 23 )
 
 [node name="HPBar" parent="." index="1"]
-visible = true
 margin_top = -41.0
 margin_bottom = -27.0
 
